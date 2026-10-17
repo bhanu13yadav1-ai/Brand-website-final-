@@ -1,0 +1,21 @@
+BLACKED — Visual Demo Update (based on Brand-website-3)
+
+WHAT'S INCLUDED
+- Phone-first black / hot-pink storefront inspired by the supplied reference screenshots.
+- Main Home, Sanskari Edit, Wellness 18+, Wishlist and Profile views.
+- Demo search and category filters, product detail gallery, session wishlist, cart quantities and Comfort Finder.
+- Extra entry points for the Plus-One Club 18+ outing-ideas prototype, local manual Fit Studio preview, and a starter size/fit guide.
+- Reuses existing concept photos from Brand-website-3 and wellness product photos from Brand-website-2 via their GitHub raw URLs.
+
+DEMO LIMITATIONS
+Prices, discounts, ratings and product details are sample interface content, not verified offers or stock. The wellness age prompt is self-attestation, not formal verification. The images are generated concept visuals and are not confirmed manufacturer photographs. Fit Studio only layers a concept cutout manually over a selected photo; it is not automatic or photorealistic virtual fitting. There is no account database, inventory, live order service or payment gateway.
+
+UPLOAD ON ANDROID
+1. Open https://github.com/bhanu13yadav1-ai/Brand-website-3
+2. Make a backup copy of the current root-level index.html first.
+3. Replace the repository's root-level index.html with the index.html from this package, then commit.
+4. Do NOT delete or rename any existing JPG, PNG or WEBP image files. The demo references these existing assets, including wellness assets hosted in Brand-website-2.
+5. Wait for GitHub Pages to refresh and reopen the published site.
+
+IMPORTANT
+The connected GitHub access available during preparation was read-only, so this package has not been pushed or published. This ZIP is a visual front-end demo. Before using it as a permanent replacement, compare it against the old site and verify which specialized features need to be merged back into the new visual design.

@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08080b">
+<meta name="description" content="BLACKED — a mobile-first innerwear and adult wellness demo.">
+<title>BLACKED — Confidence Looks Good on You</title>
+<style>
+:root{--bg:#08080b;--surface:#121218;--surface2:#191720;--line:#29242f;--pink:#ff1684;--pink2:#ff6ab3;--text:#f8f5f8;--muted:#b7adb8;--gold:#ffc94d;--radius:18px;--shadow:0 14px 34px #0008}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;background:radial-gradient(ellipse at 80% -15%,#351327 0,transparent 38%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.4;padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+button,input,select{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--pink2);outline-offset:3px}
+.announcement{background:#170c14;color:#edc8db;text-align:center;padding:7px 10px;font-size:10px;letter-spacing:.12em;border-bottom:1px solid #32202b}
+.announcement b{color:var(--pink2)}
+.header{height:62px;display:flex;align-items:center;gap:12px;padding:0 16px;position:sticky;top:0;z-index:20;background:#08080bf2;backdrop-filter:blur(16px);border-bottom:1px solid #211d26}
+.iconbtn{border:0;background:none;color:#fff;font-size:23px;width:30px;height:36px;display:grid;place-items:center;position:relative;padding:0}
+.brand{display:flex;align-items:center;gap:7px;flex:1;justify-content:center;min-width:0}
+.brandname{font-weight:900;font-size:22px;letter-spacing:.07em;line-height:1}
+.brandname span{color:var(--pink2)}
+.brandtag{font-size:7px;display:block;letter-spacing:.15em;color:#d5a4be;text-align:center;margin-top:3px}
+.iconcount{position:absolute;right:-6px;top:0;background:var(--pink);color:white;border-radius:50%;font-size:10px;font-weight:800;min-width:17px;height:17px;display:grid;place-items:center}
+.searchbar{display:none;padding:0 16px 10px;background:#08080bf2;position:sticky;top:62px;z-index:19}
+.searchbar.show{display:flex}
+.searchbar input{width:100%;background:#18151d;border:1px solid #403441;border-radius:13px;padding:12px 14px;color:#fff;outline:none}
+main{max-width:1160px;margin:auto;padding:0 12px}
+.view{display:none;animation:rise .22s ease}
+.view.active{display:block}
+@keyframes rise{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{position:relative;border-radius:20px;overflow:hidden;min-height:340px;margin:14px 0 20px;background:#27101f;isolation:isolate}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 24%;z-index:-2}
+.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#07070af0 0%,#07070ac4 39%,#08080a22 100%),linear-gradient(0deg,#09080ce8,transparent 50%)}
+.hero-copy{max-width:390px;padding:30px 18px 22px}
+.eyebrow{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#ffc0dd;font-weight:800;margin:0 0 12px}
+.hero h1{font-size:clamp(31px,8.8vw,49px);line-height:1.01;letter-spacing:-.04em;margin:0 0 12px;font-weight:850}
+.hero h1 em,.section-title em{font-style:normal;color:var(--pink2)}
+.hero p{color:#e6dbe4;font-size:13px;max-width:255px;margin:0 0 18px}
+.btn{border:0;border-radius:999px;background:linear-gradient(105deg,#ff0c77,#ff358f);color:#fff;font-weight:800;padding:13px 17px;box-shadow:0 8px 22px #ff16842b;display:inline-flex;align-items:center;justify-content:center;gap:9px}
+.btn.secondary{background:#211923;border:1px solid #4a3345;box-shadow:none}
+.btn.small{font-size:12px;padding:10px 13px}
+.hero-note{font-size:10px!important;color:#c2b4c0!important;margin-top:10px!important;margin-bottom:0!important}
+.quick-values{display:flex;gap:15px;flex-wrap:wrap;margin-top:17px;color:#f6cfdf;font-size:10px}
+.quick-values span{display:flex;align-items:center;gap:5px}
+.section{margin:24px 0}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:12px}
+.section-title{font-size:20px;line-height:1.08;letter-spacing:-.03em;margin:0;font-weight:850}
+.section-sub{font-size:11px;color:var(--muted);margin:5px 0 0}
+.seeall,.text-link{color:#ff8cbe;font-weight:750;font-size:11px;white-space:nowrap;background:none;border:0;padding:6px 0}
+.categoryrail{display:flex;gap:13px;overflow-x:auto;scrollbar-width:none;padding:2px 2px 7px}
+.categoryrail::-webkit-scrollbar{display:none}
+.category{border:0;background:transparent;color:#eee;min-width:68px;max-width:78px;padding:0;text-align:center;font-size:10px;line-height:1.2;display:flex;align-items:center;flex-direction:column;gap:7px}
+.catimg{width:62px;height:62px;border-radius:50%;overflow:hidden;border:1px solid #75425f;background:#21101e;box-shadow:0 0 0 3px #ffffff04}
+.catimg img{width:100%;height:100%;object-fit:cover}
+.category.active .catimg{border:2px solid var(--pink);box-shadow:0 0 0 3px #ff168428}
+.category.active span:last-child{color:#ff78b4}
+.promo-row{display:grid;grid-template-columns:1fr;gap:10px;margin:22px 0}
+.promo{min-height:120px;border-radius:17px;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:8px;overflow:hidden;position:relative;background:linear-gradient(100deg,#49112f,#c52b76 62%,#f66ca9);border:1px solid #7a2b56}
+.promo.wellness{background:linear-gradient(110deg,#21091b,#78104d 60%,#c31e80)}
+.promo h3{font-size:18px;line-height:1.05;margin:0 0 5px}
+.promo p{font-size:11px;color:#ffe5f1;margin:0 0 10px}
+.promo .promo-icon{font-size:46px;filter:drop-shadow(0 4px 9px #0006);flex-shrink:0}
+.promo .btn{padding:9px 12px;font-size:11px;background:#fff;color:#a8125c;box-shadow:none}
+.productgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.product{min-width:0;border:1px solid #27232d;background:linear-gradient(180deg,#17141c,#100f14);border-radius:15px;overflow:hidden;position:relative}
+.product-photo{position:relative;aspect-ratio: .88;overflow:hidden;background:#20131f}
+.product-photo img{width:100%;height:100%;object-fit:cover;transition:transform .25s}
+.product:active .product-photo img{transform:scale(1.02)}
+.product-badge{position:absolute;bottom:8px;left:8px;padding:4px 7px;border-radius:9px;background:var(--pink);color:#fff;font-size:9px;font-weight:850}
+.heart{position:absolute;right:8px;top:8px;border:1px solid #ffffff65;background:#09080b88;color:white;border-radius:50%;width:31px;height:31px;font-size:17px;display:grid;place-items:center}
+.heart.saved{background:var(--pink);border-color:var(--pink)}
+.product-body{padding:10px 10px 11px}
+.product-name{font-size:13px;font-weight:750;line-height:1.25;margin:0 0 5px;display:block}
+.product-rating{font-size:10px;color:var(--gold);margin-bottom:6px}
+.product-price{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-bottom:9px}
+.price{font-size:15px;font-weight:850}
+.oldprice{font-size:10px;color:#817780;text-decoration:line-through}
+.discount{font-size:10px;color:#ffca70;font-weight:800}
+.addbtn{width:100%;padding:10px 7px;border:0;border-radius:999px;background:linear-gradient(100deg,#ff0d76,#ff2c8a);color:white;font-size:12px;font-weight:850}
+.moodgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mood{border-radius:15px;overflow:hidden;min-height:125px;position:relative;background:#25131f;border:1px solid #39303c}
+.mood img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.8}
+.mood:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#050507e8,transparent 74%)}
+.mood span{position:absolute;z-index:1;bottom:10px;left:11px;font-weight:800}
+.truststrip{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:20px 0}
+.trust{border:1px solid #312734;border-radius:13px;padding:12px 7px;text-align:center;background:#151119}
+.trust strong{display:block;font-size:11px;color:#ffd4e7;margin:5px 0 2px}
+.trust small{font-size:9px;color:var(--muted)}
+.tagrow{display:flex;gap:7px;overflow:auto;scrollbar-width:none;margin:0 0 13px;padding:2px 0 5px}
+.tag{border:1px solid #403543;background:#17141b;color:#e7dfe8;border-radius:999px;padding:8px 13px;font-size:10px;white-space:nowrap}
+.tag.active{background:var(--pink);border-color:var(--pink);color:#fff;font-weight:800}
+.subhero{position:relative;min-height:216px;border-radius:18px;overflow:hidden;margin:14px 0 18px;background:#3d182b}
+.subhero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.83}
+.subhero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#09080bed,#0a080c88 55%,#09080c1a)}
+.subhero-content{position:relative;z-index:1;padding:23px 17px;max-width:300px}
+.subhero h1{font-size:31px;line-height:1.03;margin:0 0 10px;letter-spacing:-.04em}
+.subhero p{font-size:12px;color:#f3dce7;margin:0 0 14px}
+.wellnesshero{min-height:235px;background:#2a0826}
+.wellnesshero:after{background:linear-gradient(90deg,#09070ff2,#17071999 52%,#09080b14),linear-gradient(0deg,#08080b94,transparent)}
+.wellnesshero h1{font-size:32px;color:#ff83bc}
+.wellnesshero .hero-perks{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 16px;font-size:10px;color:#fae8f2}
+.comfortbox{border:1px solid #743457;background:linear-gradient(110deg,#21101f,#431033 60%,#261024);padding:17px;border-radius:17px;display:flex;gap:12px;align-items:center;margin:20px 0}
+.comfortbox .emoji{font-size:32px}
+.comfortbox h3{font-size:16px;margin:0 0 4px}
+.comfortbox p{font-size:11px;color:#d4bdcf;margin:0 0 10px}
+.profilecard{border:1px solid var(--line);border-radius:19px;background:var(--surface);padding:20px;margin:18px 0}
+.avatar{width:58px;height:58px;border-radius:50%;background:linear-gradient(140deg,#ff1684,#7b1db1);display:grid;place-items:center;font-size:24px;font-weight:900;margin-bottom:12px}
+.profilelist{display:grid;gap:9px;margin-top:18px}
+.profileitem{width:100%;border:1px solid #342c38;border-radius:13px;background:#18141c;color:white;display:flex;justify-content:space-between;align-items:center;padding:13px;text-align:left}
+.empty{padding:35px 15px;border:1px dashed #423442;border-radius:17px;text-align:center;color:var(--muted)}
+.empty strong{display:block;color:white;font-size:16px;margin-bottom:5px}
+.bottomnav{position:fixed;z-index:30;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(5,1fr);padding:8px 5px calc(8px + env(safe-area-inset-bottom));background:#0b0a0ff5;backdrop-filter:blur(18px);border-top:1px solid #27222b;box-shadow:0 -8px 28px #0004}
+.navitem{background:none;border:0;color:#9c939f;display:flex;align-items:center;flex-direction:column;gap:3px;padding:2px;font-size:10px}
+.navitem .navico{font-size:21px;line-height:1.2}
+.navitem.active{color:#ff3b96;font-weight:850}
+.overlay{position:fixed;inset:0;z-index:60;background:#030205d9;backdrop-filter:blur(8px);display:none;align-items:flex-end;justify-content:center;padding:0}
+.overlay.open{display:flex}
+.sheet{background:#100e14;border:1px solid #3a2a39;border-radius:22px 22px 0 0;width:100%;max-width:700px;max-height:92dvh;overflow:auto;padding:17px 15px calc(18px + env(safe-area-inset-bottom));box-shadow:var(--shadow);animation:sheetin .22s ease}
+@keyframes sheetin{from{transform:translateY(22px);opacity:.5}to{transform:translateY(0);opacity:1}}
+.sheethead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.sheethead h2{font-size:20px;margin:0}
+.close{border:1px solid #493847;background:#201822;color:#fff;border-radius:50%;width:34px;height:34px;font-size:20px}
+.detailgrid{display:grid;grid-template-columns:1fr;gap:14px}
+.detailphoto{border-radius:17px;overflow:hidden;aspect-ratio:1/1;background:#241321;position:relative}
+.detailphoto img{width:100%;height:100%;object-fit:cover}
+.galleryarrows{display:flex;justify-content:space-between;position:absolute;left:10px;right:10px;top:46%}
+.galleryarrows button{background:#08070bbd;color:white;border:1px solid #fff7;border-radius:50%;width:35px;height:35px;font-size:19px}
+.detailthumbs{display:flex;gap:8px;overflow:auto;margin-top:8px}
+.detailthumbs button{border:1px solid #4a3a4b;padding:0;border-radius:9px;overflow:hidden;min-width:49px;width:49px;height:50px;background:#20151e}
+.detailthumbs img{width:100%;height:100%;object-fit:cover}
+.detailcopy h2{font-size:24px;line-height:1.1;margin:4px 0 8px}
+.demo-notice{font-size:10px;color:#c4afbf;background:#1b151d;border:1px solid #352835;border-radius:10px;padding:9px;margin:12px 0}
+.featurelist{padding:0;list-style:none;display:grid;gap:9px;color:#e9dfe8;font-size:12px}
+.featurelist li:before{content:"✓";color:#ff64ae;font-weight:900;margin-right:8px}
+.detailbuy{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
+.detailbuy .price{font-size:21px}
+.choicegroup{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.choice{border:1px solid #453445;border-radius:12px;background:#1a151d;color:#eee;padding:12px 6px;font-size:11px}
+.choice.active{border-color:var(--pink);background:#4b1132}
+.formlabel{display:block;font-weight:800;margin:16px 0 8px}
+.resultlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.cartrow{display:grid;grid-template-columns:65px 1fr auto;gap:10px;padding:11px 0;border-bottom:1px solid #322832;align-items:center}
+.cartrow img{width:65px;height:72px;object-fit:cover;border-radius:10px}
+.cartrow h4{font-size:12px;margin:0 0 5px}
+.qty{display:flex;align-items:center;gap:9px;margin-top:6px}
+.qty button{background:#261c29;border:1px solid #4d374b;color:#fff;border-radius:7px;width:25px;height:25px}
+.carttotal{display:flex;justify-content:space-between;font-weight:850;font-size:18px;margin:17px 0}
+.toast{position:fixed;bottom:85px;left:50%;transform:translate(-50%,12px);z-index:80;background:#f9e9f1;color:#341328;padding:11px 15px;border-radius:999px;font-size:12px;font-weight:800;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s;max-width:90%;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.footer-note{font-size:10px;color:#928692;text-align:center;margin:28px 0 10px}
+.hide{display:none!important}
+@media(min-width:600px){
+ body{padding-bottom:25px}
+ main{padding:0 22px}
+ .header{padding:0 24px;height:70px}
+ .searchbar{top:70px;padding:0 24px 12px}
+ .hero{min-height:460px;margin-top:20px}
+ .hero-copy{padding:46px 36px;max-width:460px}
+ .hero h1{font-size:52px}
+ .hero p{font-size:15px;max-width:320px}
+ .promo-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .productgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+ .moodgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .subhero{min-height:280px}
+ .subhero-content{padding:34px 30px;max-width:420px}
+ .subhero h1{font-size:42px}
+ .detailgrid{grid-template-columns:1fr 1fr;align-items:start}
+ .sheet{border-radius:22px;padding:20px;max-height:88dvh}
+ .overlay{align-items:center;padding:20px}
+ .bottomnav{position:static;max-width:430px;margin:24px auto 0;border:1px solid #27222b;border-radius:18px;box-shadow:none;padding:10px}
+}
+@media(min-width:900px){
+ .header{padding:0 max(30px,calc((100vw - 1160px)/2))}
+ main{padding:0 24px}
+ .hero{min-height:510px}
+ .hero-copy{padding:60px 50px}
+ .productgrid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .categoryrail{gap:22px}
+ .category{min-width:90px}
+ .catimg{width:76px;height:76px}
+ .section{margin:32px 0}
+ .promo{min-height:150px;padding:22px}
+ .promo h3{font-size:22px}
+ .promo .promo-icon{font-size:60px}
+ .detailphoto{max-height:540px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="announcement">COMFORT · CONFIDENCE · PERSONAL WELLNESS <b>✦ BLACKED</b></div>
+<header class="header">
+  <button class="iconbtn" id="menuBtn" aria-label="Browse categories">☰</button>
+  <a class="brand" href="#home" aria-label="BLACKED home"><span><span class="brandname">BLACK<span>ED</span></span><small class="brandtag">CONFIDENCE LOOKS GOOD ON YOU</small></span></a>
+  <button class="iconbtn" id="searchBtn" aria-label="Search products">⌕</button>
+  <button class="iconbtn" id="wishlistBtn" aria-label="Open wishlist">♡</button>
+  <button class="iconbtn" id="cartBtn" aria-label="Open shopping bag">🛍<span class="iconcount" id="cartCount">0</span></button>
+</header>
+<div class="searchbar" id="searchBar"><input id="searchInput" type="search" placeholder="Search bras, sets, wellness…" autocomplete="off" aria-label="Search products"></div>
+
+<main>
+  <section class="view active" id="view-home" data-view="home">
+    <div class="hero">
+      <img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/owner-ref-noir-halter-rose-demi.jpg" alt="BLACKED lingerie campaign concept" fetchpriority="high">
+      <div class="hero-copy">
+        <div class="eyebrow">THE BLACKED EXPERIENCE</div>
+        <h1>Premium<br>Innerwear<br>for Every <em>You.</em></h1>
+        <p>Comfort, confidence and style—made personal.</p>
+        <button class="btn" data-nav="sanskari">Explore Collection <span>→</span></button>
+        <div class="quick-values"><span>✧ Comfort</span><span>♧ Style</span><span>♡ Confidence</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sectionhead"><div><h2 class="section-title">Shop by <em>category</em></h2><p class="section-sub">Find a style that feels like you.</p></div><button class="seeall" data-nav="sanskari">View all →</button></div>
+      <div class="categoryrail">
+        <button class="category" data-nav="sanskari" data-filter="bras"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/design-12-midnight-lace-product.jpg" alt=""></span><span>Bras</span></button>
+        <button class="category" data-nav="sanskari" data-filter="panties"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/design-13-scarlet-satin-product.jpg" alt=""></span><span>Panties</span></button>
+        <button class="category" data-nav="sanskari" data-filter="sets"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/cutout-black-lace-set.webp" alt=""></span><span>Sets</span></button>
+        <button class="category" data-nav="sanskari"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/external-ref-syrn-bridal.jpg" alt=""></span><span>Sanskari Edit</span></button>
+        <button class="category" data-nav="wellness"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/wellness-hero.webp" alt=""></span><span>Wellness 18+</span></button>
+      </div>
+    </div>
+
+    <div class="promo-row">
+      <article class="promo">
+        <div><div class="eyebrow">NEW COLLECTION</div><h3>Sanskari Edit</h3><p>Everyday comfort. Desi style.</p><button class="btn" data-nav="sanskari">Shop edit ↗</button></div>
+        <div class="promo-icon">🌸</div>
+      </article>
+      <article class="promo wellness">
+        <div><div class="eyebrow">PRIVATE · 18+</div><h3>Wellness 18+</h3><p>Explore with confidence.</p><button class="btn" data-nav="wellness">Explore wellness ↗</button></div>
+        <div class="promo-icon">♡</div>
+      </article>
+    </div>
+
+    <section class="section">
+      <div class="sectionhead"><div><h2 class="section-title">Best <em>Sellers</em></h2><p class="section-sub">A few BLACKED favourites to explore.</p></div><button class="seeall" data-nav="sanskari">See all →</button></div>
+      <div class="productgrid" id="homeProducts"></div>
+    </section>
+    <section class="section">
+      <div class="sectionhead"><div><h2 class="section-title">Shop by <em>mood</em></h2><p class="section-sub">Your moment, your style.</p></div></div>
+      <div class="moodgrid">
+        <button class="mood" data-nav="sanskari" data-filter="everyday"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/owner-ref-ivory-bloom-variation.jpg" alt=""><span>Everyday</span></button>
+        <button class="mood" data-nav="sanskari" data-filter="romantic"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/owner-ref-midnight-lace-editorial.jpg" alt=""><span>Romantic</span></button>
+        <button class="mood" data-nav="sanskari" data-filter="sets"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/owner-ref-scarlet-ivory-grid.jpg" alt=""><span>Party Edit</span></button>
+        <button class="mood" data-nav="sanskari" data-filter="bridal"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/external-ref-syrn-bridal.jpg" alt=""><span>Sanskari</span></button>
+      </div>
+    </section>
+    <div class="truststrip"><div class="trust"><div>♧</div><strong>Comfort first</strong><small>Thoughtful details</small></div><div class="trust"><div>◇</div><strong>Discreet preview</strong><small>Private by design</small></div><div class="trust"><div>♡</div><strong>Your choice</strong><small>Explore at your pace</small></div></div>
+    <p class="footer-note">Demo storefront · images are generated concept visuals · sample prices only · no real orders or payments.</p>
+  </section>
+
+  <section class="view" id="view-sanskari" data-view="sanskari">
+    <div class="subhero">
+      <img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/external-ref-syrn-bridal.jpg" alt="Sanskari Edit fashion concept">
+      <div class="subhero-content"><div class="eyebrow">THE DESI COMFORT EDIT</div><h1>Sanskari <em style="color:#ff85b9">Edit</em></h1><p>Traditional touch. Modern comfort. Soft fabrics and elegant everyday styles.</p><button class="btn small" onclick="document.getElementById('sanskariGrid').scrollIntoView({behavior:'smooth'})">Explore collection →</button></div>
+    </div>
+    <div class="section">
+      <div class="sectionhead"><div><h2 class="section-title">Choose your <em>style</em></h2><p class="section-sub">Tap a category to filter the edit.</p></div></div>
+      <div class="categoryrail">
+        <button class="category" data-nav="sanskari" data-filter="everyday"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/owner-ref-ivory-bloom-variation.jpg" alt=""></span><span>Everyday</span></button>
+        <button class="category" data-nav="sanskari" data-filter="cotton"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/design-14-ivory-bloom-product.jpg" alt=""></span><span>Cotton</span></button>
+        <button class="category" data-nav="sanskari" data-filter="bras"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/design-12-midnight-lace-product.jpg" alt=""></span><span>T-Shirt Bras</span></button>
+        <button class="category" data-nav="sanskari" data-filter="bridal"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/external-ref-syrn-bridal.jpg" alt=""></span><span>Bridal</span></button>
+        <button class="category" data-nav="sanskari" data-filter="nightwear"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/owner-ref-bow-lace-collection.jpg" alt=""></span><span>Nightwear</span></button>
+      </div>
+    </div>
+    <div class="section" id="sanskariGrid">
+      <div class="sectionhead"><div><h2 class="section-title">Sanskari <em>Collection</em></h2><p class="section-sub" id="sanskariCount">Browse sample styles.</p></div></div>
+      <div class="tagrow" id="sanskariFilters">
+        <button class="tag active" data-filter="all">All</button><button class="tag" data-filter="everyday">Everyday</button><button class="tag" data-filter="cotton">Cotton</button><button class="tag" data-filter="bras">T-Shirt Bras</button><button class="tag" data-filter="bridal">Bridal</button><button class="tag" data-filter="nightwear">Nightwear</button>
+      </div>
+      <div class="productgrid" id="sanskariProducts"></div>
+    </div>
+    <p class="footer-note">Sanskari Edit is a design preview. Product photos, availability and prices must be verified before sale.</p>
+  </section>
+
+  <section class="view" id="view-wellness" data-view="wellness">
+    <div class="subhero wellnesshero">
+      <img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/wellness-hero.webp" alt="BLACKED intimate wellness concept image">
+      <div class="subhero-content"><div class="eyebrow">ADULT WELLNESS · 18+</div><h1>Wellness <em>18+</em></h1><p>Explore, relax, feel better. A private, confidence-first wellness discovery demo.</p><div class="hero-perks"><span>▣ Discreet concept</span><span>◇ Private preview</span><span>♡ Consent first</span></div><button class="btn small" data-open="comfortFinder">Find my comfort →</button></div>
+    </div>
+    <div class="section">
+      <div class="sectionhead"><div><h2 class="section-title">Explore by <em>interest</em></h2><p class="section-sub">Choose an area to discover the demo catalogue.</p></div></div>
+      <div class="categoryrail">
+        <button class="category" data-nav="wellness" data-filter="personal"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-2/main/wellness-everyday-wellness-wand.jpg" alt=""></span><span>Personal</span></button>
+        <button class="category" data-nav="wellness" data-filter="couples"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-2/main/wellness-mini-wellness-duo.jpg" alt=""></span><span>Couples</span></button>
+        <button class="category" data-nav="wellness" data-filter="beginner"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-2/main/wellness-starter-comfort.jpg" alt=""></span><span>Beginner</span></button>
+        <button class="category" data-nav="wellness" data-filter="wearable"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-2/main/wellness-wearable-comfort-ring.jpg" alt=""></span><span>Wearables</span></button>
+        <button class="category" data-nav="wellness" data-filter="care"><span class="catimg"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-2/main/wellness-purple-body-massager.jpg" alt=""></span><span>Care & more</span></button>
+      </div>
+    </div>
+    <div class="promo-row">
+      <article class="promo wellness"><div><div class="eyebrow">A LITTLE GUIDANCE</div><h3>Comfort Finder</h3><p>Tell us your preferences.</p><button class="btn" data-open="comfortFinder">Get recommendations →</button></div><div class="promo-icon">♡</div></article>
+      <article class="promo"><div><div class="eyebrow">WELLNESS NOTES</div><h3>Take your time</h3><p>Clear information, no pressure.</p><button class="btn" data-open="wellnessInfo">Read the guide ↗</button></div><div class="promo-icon">✧</div></article>
+    </div>
+    <div class="section">
+      <div class="sectionhead"><div><h2 class="section-title">Wellness <em>favourites</em></h2><p class="section-sub">Illustrative products—not verified stock.</p></div></div>
+      <div class="tagrow" id="wellnessFilters"><button class="tag active" data-filter="all">All</button><button class="tag" data-filter="personal">Personal Use</button><button class="tag" data-filter="couples">Couples</button><button class="tag" data-filter="beginner">Beginner</button><button class="tag" data-filter="wearable">Wearable</button></div>
+      <div class="productgrid" id="wellnessProducts"></div>
+    </div>
+    <div class="truststrip"><div class="trust"><div>▣</div><strong>Discreet concept</strong><small>Demo information</small></div><div class="trust"><div>◇</div><strong>Privacy first</strong><small>Quiz stays in page</small></div><div class="trust"><div>♡</div><strong>Comfort matters</strong><small>Choose freely</small></div></div>
+    <p class="footer-note">Adults 18+ only. This is a front-end demo; age confirmation is self-attestation, not formal verification. No real stock, safety certification or checkout is claimed.</p>
+  </section>
+
+  <section class="view" id="view-wishlist" data-view="wishlist">
+    <div class="section" style="margin-top:22px">
+      <div class="sectionhead"><div><h2 class="section-title">Your <em>Wishlist</em></h2><p class="section-sub">Saved styles stay in this page session.</p></div></div>
+      <div id="wishlistProducts" class="productgrid"></div>
+      <div id="wishlistEmpty" class="empty"><strong>Nothing saved yet</strong>Tap the heart on a product you love and it will appear here.</div>
+    </div>
+  </section>
+
+  <section class="view" id="view-profile" data-view="profile">
+    <div class="profilecard">
+      <div class="avatar">B</div><div class="eyebrow">WELCOME TO BLACKED</div><h2 style="margin:0 0 6px">Your space. Your style.</h2><p style="color:var(--muted);font-size:12px;margin:0">A local demo profile—no account or personal information is collected.</p>
+      <div class="profilelist">
+        <button class="profileitem" data-nav="sanskari"><span>♡ &nbsp; Explore innerwear</span><span>→</span></button>
+        <button class="profileitem" data-nav="wellness"><span>✧ &nbsp; Wellness 18+</span><span>→</span></button>
+        <button class="profileitem" data-open="comfortFinder"><span>⌕ &nbsp; Comfort Finder quiz</span><span>→</span></button>
+        <button class="profileitem" data-open="wellnessInfo"><span>◇ &nbsp; Privacy & demo information</span><span>→</span></button>
+      </div>
+    </div>
+    <p class="footer-note">Demo only. Sign-in, synced profile, orders, shipping and payments are not connected.</p>
+  </section>
+</main>
+
+<nav class="bottomnav" aria-label="Main navigation">
+  <button class="navitem active" data-nav="home"><span class="navico">⌂</span><span>Home</span></button>
+  <button class="navitem" data-nav="sanskari"><span class="navico">♧</span><span>Sanskari</span></button>
+  <button class="navitem" data-nav="wellness"><span class="navico">♡</span><span>Wellness</span></button>
+  <button class="navitem" data-nav="wishlist"><span class="navico">♡</span><span>Wishlist</span></button>
+  <button class="navitem" data-nav="profile"><span class="navico">♙</span><span>Profile</span></button>
+</nav>
+
+<div class="overlay" id="productOverlay" role="dialog" aria-modal="true" aria-labelledby="detailName">
+  <div class="sheet">
+    <div class="sheethead"><h2>Product details</h2><button class="close" data-close="productOverlay" aria-label="Close">×</button></div>
+    <div class="detailgrid">
+      <div>
+        <div class="detailphoto"><img id="detailImage" src="" alt=""><div class="galleryarrows"><button id="detailPrev" aria-label="Previous image">‹</button><button id="detailNext" aria-label="Next image">›</button></div></div>
+        <div class="detailthumbs" id="detailThumbs"></div>
+      </div>
+      <div class="detailcopy"><div class="eyebrow" id="detailEyebrow">BLACKED COLLECTION PREVIEW</div><h2 id="detailName">Product name</h2><div class="product-rating">★★★★★ <span style="color:var(--muted)">Concept rating preview</span></div><div class="product-price"><span class="price" id="detailPrice">₹799</span><span class="oldprice" id="detailOldPrice">₹1,299</span><span class="discount">DEMO</span></div><p id="detailDesc" style="font-size:12px;color:#d0c1ce"></p><ul class="featurelist"><li>Product concept preview</li><li>Product images open in gallery</li><li>Sample details only; verify before listing</li></ul><div class="demo-notice">This is a visual demo. Price, stock, material and specifications are illustrative and are not a real offer.</div><div class="detailbuy"><strong class="price" id="detailBuyPrice">₹799</strong><button class="btn" id="detailAdd">Add to bag →</button></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="comfortOverlay" role="dialog" aria-modal="true" aria-labelledby="comfortTitle">
+ <div class="sheet">
+  <div class="sheethead"><div><div class="eyebrow">PRIVATE · 18+</div><h2 id="comfortTitle">Find your perfect match</h2></div><button class="close" data-close="comfortOverlay" aria-label="Close">×</button></div>
+  <p style="font-size:12px;color:var(--muted);margin-top:-3px">Tell us what you’re looking for and we’ll suggest demo products. Your choices stay in this page only.</p>
+  <label class="formlabel">I’m looking for</label><div class="choicegroup" id="quizAudience"><button class="choice active" data-choice="audience" data-value="personal">Personal use</button><button class="choice" data-choice="audience" data-value="couples">Couples</button><button class="choice" data-choice="audience" data-value="curiosity">Curiosity</button></div>
+  <label class="formlabel">Experience level</label><div class="choicegroup" id="quizLevel"><button class="choice active" data-choice="level" data-value="beginner">Beginner</button><button class="choice" data-choice="level" data-value="intermediate">Intermediate</button><button class="choice" data-choice="level" data-value="advanced">Advanced</button></div>
+  <label class="formlabel">Preferred type</label><div class="choicegroup" id="quizType"><button class="choice active" data-choice="type" data-value="personal">Personal</button><button class="choice" data-choice="type" data-value="wearable">Wearable</button><button class="choice" data-choice="type" data-value="couples">Couples</button></div>
+  <button class="btn" style="width:100%;margin-top:18px" id="getRecommendations">Get recommendations →</button>
+  <div id="recommendationArea" class="hide" style="margin-top:20px"><div class="sectionhead"><div><h2 class="section-title">Recommended <em>for you</em></h2><p class="section-sub">Based on your demo choices.</p></div></div><div class="resultlist" id="recommendationProducts"></div></div>
+  <p class="footer-note">Adults 18+ only. This is a preference demo, not medical advice or a real product recommendation service.</p>
+ </div>
+</div>
+
+<div class="overlay" id="cartOverlay" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+ <div class="sheet">
+  <div class="sheethead"><h2 id="cartTitle">Your shopping bag</h2><button class="close" data-close="cartOverlay" aria-label="Close">×</button></div>
+  <div id="cartItems"></div><div id="cartEmpty" class="empty"><strong>Your bag is waiting</strong>Add a few demo products to see them here.</div>
+  <div id="cartSummary" class="hide"><div class="carttotal"><span>Demo total</span><span id="cartTotal">₹0</span></div><button class="btn" style="width:100%" id="checkoutDemo">Continue (demo only)</button><div class="demo-notice">Checkout and payments are not connected. No order will be placed.</div></div>
+ </div>
+</div>
+
+<div class="overlay" id="infoOverlay" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+ <div class="sheet"><div class="sheethead"><h2 id="infoTitle">A note on this demo</h2><button class="close" data-close="infoOverlay" aria-label="Close">×</button></div><p style="font-size:13px;color:#dfd1dc">BLACKED is shown here as a front-end design preview based on your supplied mockups. The images in this repository are generated concept visuals and may not match real physical products.</p><ul class="featurelist"><li>No sign-in or profile database</li><li>No real inventory, orders, reviews or payment service</li><li>Prices and promotions are sample UI content only</li><li>Wellness age confirmation is self-attestation, not identity verification</li><li>Comfort Finder answers are not saved or sent to a server</li></ul><button class="btn secondary" data-close="infoOverlay" style="width:100%">Got it</button></div>
+</div>
+
+<div class="overlay" id="ageOverlay" role="dialog" aria-modal="true" aria-labelledby="ageTitle">
+ <div class="sheet" style="max-width:450px">
+   <div class="eyebrow">WELLNESS 18+</div><div class="sheethead"><h2 id="ageTitle">Adults only</h2></div><p style="color:#d9c8d6;font-size:13px">The Wellness area is intended for adults aged 18 and over. Please confirm your age to continue to this demo.</p><div class="demo-notice">This is a simple on-page confirmation, not formal age verification.</div><button class="btn" style="width:100%" id="confirmAge">I am 18 or older — continue</button><button class="btn secondary" style="width:100%;margin-top:8px" id="declineAge">Go back</button>
+ </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+"use strict";
+const RAW = "https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/";
+const RAW2 = "https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-2/main/";
+const R2FILES = new Set(["wellness-everyday-wellness-wand.jpg", "wellness-mini-wellness-duo.jpg", "wellness-starter-comfort.jpg", "wellness-wearable-comfort-ring.jpg", "wellness-purple-body-massager.jpg", "wellness-violet-comfort-device.jpg", "wellness-lavender-dual-massager.jpg"]);
+const img = name => (R2FILES.has(name) ? RAW2 : RAW) + name;
+const products = [
+ {id:"p1",name:"Lace Comfort Bra",price:799,old:1299,discount:"38% OFF",category:"bras",tags:["everyday","romantic","cotton"],section:"intimates",image:"owner-ref-midnight-lace-editorial.jpg",badge:"Bestseller",desc:"A lace-inspired concept for an elegant everyday collection preview."},
+ {id:"p2",name:"Everyday Comfort Bra",price:699,old:1199,discount:"42% OFF",category:"bras",tags:["everyday","cotton"],section:"intimates",image:"owner-ref-ivory-bloom-variation.jpg",badge:"Everyday",desc:"A soft, classic style concept from the BLACKED everyday edit."},
+ {id:"p3",name:"Scarlet Satin Set",price:899,old:1499,discount:"40% OFF",category:"sets",tags:["romantic","nightwear"],section:"intimates",image:"design-13-scarlet-satin-product.jpg",badge:"Popular",desc:"Scarlet satin-inspired matching set concept."},
+ {id:"p4",name:"Midnight Lace Set",price:1099,old:1999,discount:"45% OFF",category:"sets",tags:["romantic","nightwear"],section:"intimates",image:"owner-ref-bow-lace-collection.jpg",badge:"New",desc:"A dark, romantic lace-set concept."},
+ {id:"p5",name:"Bridal Comfort Set",price:1199,old:1999,discount:"40% OFF",category:"bridal",tags:["bridal","romantic"],section:"intimates",image:"external-ref-syrn-bridal.jpg",badge:"Sanskari Edit",desc:"An illustrative bridal-inspired collection preview."},
+ {id:"p6",name:"Ivory Bloom Bra",price:749,old:1299,discount:"42% OFF",category:"cotton",tags:["everyday","cotton"],section:"intimates",image:"design-14-ivory-bloom-product.jpg",badge:"Comfort pick",desc:"An ivory-toned comfort style concept."},
+ {id:"p7",name:"Mini Comfort Wand",price:589,old:1500,discount:"Demo offer",category:"personal",tags:["personal","beginner"],section:"wellness",image:"wellness-everyday-wellness-wand.jpg",badge:"Popular",desc:"An adult wellness device concept image. Product details and safety specifications are not verified."},
+ {id:"p8",name:"Couples Comfort Duo",price:1999,old:2999,discount:"Demo offer",category:"couples",tags:["couples","intermediate"],section:"wellness",image:"wellness-mini-wellness-duo.jpg",badge:"Couples",desc:"A non-explicit couples wellness concept. No live SKU, availability or certification is represented."},
+ {id:"p9",name:"Lavender Comfort Device",price:1299,old:1999,discount:"Demo offer",category:"personal",tags:["personal","intermediate"],section:"wellness",image:"wellness-lavender-dual-massager.jpg",badge:"Explore",desc:"Illustrative wellness product photo. Confirm real product information before any listing."},
+ {id:"p10",name:"Wearable Comfort Ring",price:999,old:1499,discount:"Demo offer",category:"wearable",tags:["wearable","couples"],section:"wellness",image:"wellness-wearable-comfort-ring.jpg",badge:"Wellness",desc:"A wearable wellness concept image for demo purposes."},
+ {id:"p11",name:"Violet Comfort Massager",price:1299,old:1999,discount:"Demo offer",category:"personal",tags:["personal","advanced"],section:"wellness",image:"wellness-violet-comfort-device.jpg",badge:"New",desc:"An illustrative wellness device image; specifications are not verified."},
+ {id:"p12",name:"Starter Comfort Set",price:899,old:1399,discount:"Demo offer",category:"beginner",tags:["beginner","personal"],section:"wellness",image:"wellness-starter-comfort.jpg",badge:"Beginner",desc:"A starter-style adult wellness concept image."}
+];
+const state = {view:"home",filter:{sanskari:"all",wellness:"all"},wishlist:new Set(),cart:new Map(),currentProduct:null,detailImageIndex:0,wellnessConfirmed:false,quiz:{audience:"personal",level:"beginner",type:"personal"},search:""};
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const format = n => "₹" + Number(n).toLocaleString("en-IN");
+function productCard(p){
+ const saved=state.wishlist.has(p.id);
+ return `<article class="product" data-product="${p.id}">
+  <div class="product-photo"><img src="${img(p.image)}" alt="${p.name} concept image" loading="lazy"><span class="product-badge">${p.badge}</span><button class="heart ${saved?"saved":""}" data-heart="${p.id}" aria-label="${saved?"Remove from":"Add to"} wishlist">${saved?"♥":"♡"}</button></div>
+  <div class="product-body"><button class="product-name" data-detail="${p.id}" style="background:none;border:0;color:inherit;text-align:left;padding:0">${p.name}</button><div class="product-rating">★★★★★ <span style="color:#b8aeba">Concept preview</span></div><div class="product-price"><span class="price">${format(p.price)}</span><span class="oldprice">${format(p.old)}</span></div><button class="addbtn" data-add="${p.id}">Add to Bag</button></div>
+ </article>`;
+}
+function allViewsProducts(section,filter,query=""){
+ return products.filter(p=>{
+  if(section==="intimates" && p.section!=="intimates")return false;
+  if(section==="wellness" && p.section!=="wellness")return false;
+  if(filter && filter!=="all"){
+   const aliases={everyday:["everyday"],cotton:["cotton"],bras:["bras"],panties:["panties"],sets:["sets"],bridal:["bridal"],nightwear:["nightwear"],romantic:["romantic"],personal:["personal"],couples:["couples"],beginner:["beginner"],wearable:["wearable"],care:["personal"]};
+   const allowed=aliases[filter]||[filter];
+   if(!(allowed.includes(p.category)||allowed.some(t=>p.tags.includes(t))))return false;
+  }
+  if(query && !`${p.name} ${p.category} ${p.desc}`.toLowerCase().includes(query.toLowerCase()))return false;
+  return true;
+ });
+}
+function renderGrids(){
+ $("#homeProducts").innerHTML=products.filter(p=>p.section==="intimates").slice(0,4).map(productCard).join("");
+ const sans=allViewsProducts("intimates",state.filter.sanskari,state.search);
+ $("#sanskariProducts").innerHTML=sans.map(productCard).join("")||`<div class="empty" style="grid-column:1/-1"><strong>No styles found</strong>Try another category or search term.</div>`;
+ $("#sanskariCount").textContent=`${sans.length} demo styles · select a product for details`;
+ const well=allViewsProducts("wellness",state.filter.wellness,state.search);
+ $("#wellnessProducts").innerHTML=well.map(productCard).join("")||`<div class="empty" style="grid-column:1/-1"><strong>No wellness products found</strong>Try another filter or search term.</div>`;
+ const wish=products.filter(p=>state.wishlist.has(p.id));
+ $("#wishlistProducts").innerHTML=wish.map(productCard).join("");
+ $("#wishlistEmpty").classList.toggle("hide",wish.length>0);
+ $("#cartCount").textContent=[...state.cart.values()].reduce((a,n)=>a+n,0);
+}
+function nav(view,filter){
+ if(view==="wellness"&&!state.wellnessConfirmed){$("#ageOverlay").classList.add("open");state._pendingWellnessFilter=filter||null;return}
+ state.view=view;
+ $$(".view").forEach(v=>v.classList.toggle("active",v.dataset.view===view));
+ $$(".navitem").forEach(b=>b.classList.toggle("active",b.dataset.nav===view));
+ if(filter){
+  const target=view==="wellness"?"wellness":"sanskari";
+  state.filter[target]=filter;
+  $$("#"+target+"Filters .tag").forEach(b=>b.classList.toggle("active",b.dataset.filter===filter));
+ }
+ renderGrids();
+ window.scrollTo({top:0,behavior:"smooth"});
+ $("#searchBar").classList.remove("show");
+ $("#searchInput").value=state.search;
+}
+function toast(message){
+ const el=$("#toast");el.textContent=message;el.classList.add("show");
+ clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),2100);
+}
+function addToCart(id){
+ const p=products.find(x=>x.id===id);if(!p)return;
+ state.cart.set(id,(state.cart.get(id)||0)+1);renderGrids();toast(`${p.name} added to demo bag`);
+}
+function toggleWish(id){
+ if(state.wishlist.has(id)){state.wishlist.delete(id);toast("Removed from wishlist")}
+ else{state.wishlist.add(id);toast("Saved to wishlist")}
+ renderGrids();
+}
+function openProduct(id){
+ const p=products.find(x=>x.id===id);if(!p)return;
+ state.currentProduct=p;state.detailImageIndex=0;
+ $("#detailEyebrow").textContent=p.section==="wellness"?"WELLNESS 18+ · CONCEPT PREVIEW":"BLACKED COLLECTION PREVIEW";
+ $("#detailName").textContent=p.name;$("#detailPrice").textContent=format(p.price);$("#detailOldPrice").textContent=format(p.old);$("#detailBuyPrice").textContent=format(p.price);$("#detailDesc").textContent=p.desc;
+ const wellnessFrames=p.section==="wellness"?["wellness-hero.webp",p.image]:[p.image,"360-demo-01-front.webp","360-demo-02-front-three-quarter.webp","360-demo-03-side-quarter.webp","360-demo-04-rear-three-quarter.webp","360-demo-05-rear.webp","360-demo-06-rear-opposite.webp","360-demo-07-side-opposite.webp","360-demo-08-front-opposite.webp"];
+ state.detailFrames=wellnessFrames;
+ renderDetailImage();
+ $("#detailAdd").onclick=()=>{addToCart(p.id);$("#productOverlay").classList.remove("open")};
+ $("#productOverlay").classList.add("open");
+}
+function renderDetailImage(){
+ const frames=state.detailFrames||[state.currentProduct.image];
+ const path=frames[state.detailImageIndex%frames.length];
+ $("#detailImage").src=img(path);$("#detailImage").alt=`${state.currentProduct.name} image ${state.detailImageIndex+1}`;
+ $("#detailThumbs").innerHTML=frames.slice(0,8).map((f,i)=>`<button aria-label="Show image ${i+1}" data-thumb="${i}"><img src="${img(f)}" alt=""></button>`).join("");
+}
+function changeDetail(step){
+ const frames=state.detailFrames||[state.currentProduct.image];
+ state.detailImageIndex=(state.detailImageIndex+step+frames.length)%frames.length;renderDetailImage();
+}
+function openCart(){
+ const wrap=$("#cartItems");const entries=[...state.cart.entries()];
+ wrap.innerHTML=entries.map(([id,qty])=>{const p=products.find(x=>x.id===id);return `<div class="cartrow"><img src="${img(p.image)}" alt=""><div><h4>${p.name}</h4><strong>${format(p.price)}</strong><div class="qty"><button data-qty="${id}" data-step="-1" aria-label="Decrease quantity">−</button><span>${qty}</span><button data-qty="${id}" data-step="1" aria-label="Increase quantity">+</button></div></div><button class="close" data-remove="${id}" aria-label="Remove item">×</button></div>`}).join("");
+ $("#cartEmpty").classList.toggle("hide",entries.length>0);
+ $("#cartSummary").classList.toggle("hide",entries.length===0);
+ const total=entries.reduce((sum,[id,qty])=>sum+products.find(p=>p.id===id).price*qty,0);
+ $("#cartTotal").textContent=format(total);$("#cartOverlay").classList.add("open");
+}
+function pickQuiz(group,value){
+ state.quiz[group]=value;
+ $$(`[data-choice="${group}"]`).forEach(b=>b.classList.toggle("active",b.dataset.value===value));
+}
+function makeRecommendations(){
+ const q=state.quiz;
+ let picks=products.filter(p=>p.section==="wellness");
+ if(q.audience==="couples")picks=picks.filter(p=>p.tags.includes("couples"));
+ else if(q.audience==="personal")picks=picks.filter(p=>p.tags.includes("personal")||p.tags.includes("beginner"));
+ if(q.level==="beginner")picks=picks.filter(p=>p.tags.includes("beginner")||p.id==="p7"||p.id==="p12");
+ if(q.type==="wearable")picks=p.filter(p=>p.tags.includes("wearable"));
+ else if(q.type==="couples")picks=p.filter(p=>p.tags.includes("couples"));
+ if(picks.length<2)picks=products.filter(p=>p.section==="wellness").slice(0,4);
+ $("#recommendationProducts").innerHTML=picks.slice(0,4).map(productCard).join("");
+ $("#recommendationArea").classList.remove("hide");
+}
+document.addEventListener("click",e=>{
+ const navbtn=e.target.closest("[data-nav]");
+ if(navbtn){e.preventDefault();nav(navbtn.dataset.nav,navbtn.dataset.filter);return}
+ const add=e.target.closest("[data-add]");if(add){e.preventDefault();addToCart(add.dataset.add);return}
+ const heart=e.target.closest("[data-heart]");if(heart){e.preventDefault();toggleWish(heart.dataset.heart);return}
+ const detail=e.target.closest("[data-detail]");if(detail){e.preventDefault();openProduct(detail.dataset.detail);return}
+ const open=e.target.closest("[data-open]");if(open){const target=open.dataset.open==="comfortFinder"?"comfortOverlay":"infoOverlay";$("#"+target).classList.add("open");return}
+ const close=e.target.closest("[data-close]");if(close){$("#"+close.dataset.close).classList.remove("open");return}
+ const tag=e.target.closest(".tag[data-filter]");if(tag){
+  const parent=tag.closest("#sanskariFilters,#wellnessFilters");if(!parent)return;
+  const key=parent.id==="sanskariFilters"?"sanskari":"wellness";
+  state.filter[key]=tag.dataset.filter;parent.querySelectorAll(".tag").forEach(b=>b.classList.toggle("active",b===tag));renderGrids();return;
+ }
+ const choice=e.target.closest("[data-choice]");if(choice){pickQuiz(choice.dataset.choice,choice.dataset.value);return}
+ const qty=e.target.closest("[data-qty]");if(qty){const id=qty.dataset.qty;const next=(state.cart.get(id)||0)+Number(qty.dataset.step);if(next<=0)state.cart.delete(id);else state.cart.set(id,next);renderGrids();openCart();return}
+ const remove=e.target.closest("[data-remove]");if(remove){state.cart.delete(remove.dataset.remove);renderGrids();openCart();return}
+ const thumb=e.target.closest("[data-thumb]");if(thumb){state.detailImageIndex=Number(thumb.dataset.thumb);renderDetailImage();return}
+ const category=e.target.closest("[data-filter]");
+ if(category&&category.classList.contains("category"))return;
+});
+$("#searchBtn").addEventListener("click",()=>{$("#searchBar").classList.toggle("show");if($("#searchBar").classList.contains("show"))$("#searchInput").focus();else{state.search="";renderGrids()}});
+$("#searchInput").addEventListener("input",e=>{state.search=e.target.value.trim();renderGrids()});
+$("#cartBtn").addEventListener("click",openCart);
+$("#wishlistBtn").addEventListener("click",()=>nav("wishlist"));
+$("#menuBtn").addEventListener("click",()=>{const v=state.view==="home"?"sanskari":state.view==="sanskari"?"wellness":"home";nav(v);});
+$("#detailPrev").addEventListener("click",()=>changeDetail(-1));
+$("#detailNext").addEventListener("click",()=>changeDetail(1));
+$("#getRecommendations").addEventListener("click",makeRecommendations);
+$("#confirmAge").addEventListener("click",()=>{state.wellnessConfirmed=true;$("#ageOverlay").classList.remove("open");nav("wellness",state._pendingWellnessFilter||undefined);state._pendingWellnessFilter=null});
+$("#declineAge").addEventListener("click",()=>{$("#ageOverlay").classList.remove("open");nav("home")});
+$("#checkoutDemo").addEventListener("click",()=>toast("Demo only — no payment or order was created"));
+$$("[data-close]").forEach(b=>b.addEventListener("keydown",e=>{if(e.key==="Escape")b.click()}));
+$$(".overlay").forEach(el=>el.addEventListener("click",e=>{if(e.target===el)el.classList.remove("open")}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$$(".overlay.open").forEach(o=>o.classList.remove("open"));if($("#productOverlay").classList.contains("open")){if(e.key==="ArrowLeft")changeDetail(-1);if(e.key==="ArrowRight")changeDetail(1)}});
+renderGrids();
+})();
+</script>
+</body>
+</html>
