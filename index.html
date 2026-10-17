@@ -153,6 +153,25 @@ main{max-width:1160px;margin:auto;padding:0 12px}
 .toast{position:fixed;bottom:85px;left:50%;transform:translate(-50%,12px);z-index:80;background:#f9e9f1;color:#341328;padding:11px 15px;border-radius:999px;font-size:12px;font-weight:800;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s;max-width:90%;text-align:center}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .footer-note{font-size:10px;color:#928692;text-align:center;margin:28px 0 10px}
+.concept-highlight{display:grid;grid-template-columns:112px minmax(0,1fr);gap:13px;align-items:center;padding:12px;border:1px solid #3a2637;border-radius:17px;background:linear-gradient(115deg,#191019,#20121f 65%,#101014)}
+.concept-highlight button{border:1px solid #513448;border-radius:11px;padding:0;background:#08080b;overflow:hidden;cursor:zoom-in}
+.concept-highlight img{width:100%;height:145px;object-fit:cover;object-position:top center}
+.concept-highlight h3{font-size:15px;line-height:1.2;margin:0 0 6px}
+.concept-highlight p{font-size:11px;color:var(--muted);margin:0 0 9px}
+.concept-grid{display:grid;grid-template-columns:1fr;gap:13px}
+.concept-card{border:1px solid #352633;border-radius:16px;overflow:hidden;background:#110e14;min-width:0}
+.concept-card button.concept-image{display:block;width:100%;border:0;padding:0;background:#07070a;cursor:zoom-in}
+.concept-card img{display:block;width:100%;height:auto;max-height:620px;object-fit:contain;object-position:top center;background:#07070a}
+.concept-card-copy{padding:12px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.concept-card-copy h3{font-size:13px;margin:0 0 4px}
+.concept-card-copy p{font-size:10px;color:var(--muted);margin:0}
+.concept-open{flex:none;border:1px solid #543248;background:#211521;color:#ffd7e8;border-radius:999px;padding:8px 10px;font-size:11px;font-weight:800}
+.concept-full-sheet{width:100%;max-width:980px;height:min(94dvh,1000px);max-height:94dvh;display:flex;flex-direction:column;gap:8px;padding:12px;background:#08080b}
+.concept-full-stage{flex:1;min-height:0;display:grid;place-items:center;background:#030305;border-radius:12px;overflow:auto}
+.concept-full-stage img{display:block;max-width:100%;max-height:100%;object-fit:contain}
+.concept-full-caption{font-size:11px;color:#cdb9c9;margin:0 2px 3px}
+@media(min-width:600px){.concept-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.concept-highlight{grid-template-columns:145px minmax(0,1fr)}.concept-highlight img{height:175px}}
+@media(min-width:900px){.concept-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .hide{display:none!important}
 @media(min-width:600px){
  body{padding-bottom:25px}
@@ -252,7 +271,39 @@ main{max-width:1160px;margin:auto;padding:0 12px}
       </div>
     </section>
     <div class="truststrip"><div class="trust"><div>♧</div><strong>Comfort first</strong><small>Thoughtful details</small></div><div class="trust"><div>◇</div><strong>Discreet preview</strong><small>Private by design</small></div><div class="trust"><div>♡</div><strong>Your choice</strong><small>Explore at your pace</small></div></div>
-    <p class="footer-note">Demo storefront · images are generated concept visuals · sample prices only · no real orders or payments.</p>
+    <div class="section">
+      <div class="sectionhead"><div><h2 class="section-title">More from <em>BLACKED</em></h2><p class="section-sub">Extra concept spaces from the existing project.</p></div></div>
+      <div class="promo-row">
+        <article class="promo"><div><div class="eyebrow">PLUS-ONE CLUB · 18+</div><h3>Make a plan together</h3><p>Café, events and shared outing ideas.</p><button class="btn" data-open="plusOne">Explore Plus-One →</button></div><div class="promo-icon">♡</div></article>
+        <article class="promo wellness"><div><div class="eyebrow">PRIVATE PREVIEW</div><h3>Fit Studio</h3><p>Upload a photo and position a concept overlay.</p><button class="btn" data-open="fitStudio">Open Fit Studio →</button></div><div class="promo-icon">✧</div></article>
+      </div>
+    </div>
+    <section class="section" aria-labelledby="conceptHighlightTitle">
+      <div class="sectionhead"><div><h2 class="section-title">Your visual <em>direction</em></h2><p class="section-sub">Generated layout boards that guide this demo’s look.</p></div></div>
+      <div class="concept-highlight">
+        <button type="button" data-preview-image="01-home-and-shopping-flow.png" aria-label="Open Home and shopping flow design board"><img src="design-previews/01-home-and-shopping-flow.png" alt="Generated BLACKED mobile shopping UI concept board" loading="lazy"></button>
+        <div><h3 id="conceptHighlightTitle">BLACKED screen concepts</h3><p>Dark surfaces, hot-pink accents, mobile cards and the three main shopping spaces.</p><button class="btn small" data-nav="concepts">View all image boards →</button></div>
+      </div>
+      <p class="footer-note">These boards are UI mockups, not individual product photos or proof of real stock.</p>
+    </section>
+    <p class="footer-note">Demo storefront · generated concept visuals · sample prices only · no real orders or payments.</p>
+  </section>
+
+  <section class="view" id="view-concepts" data-view="concepts">
+    <div class="subhero" style="min-height:190px;background:linear-gradient(110deg,#160b15,#2b0b24 60%,#0b0b10)">
+      <div class="subhero-content"><div class="eyebrow">DESIGN PREVIEW · 7 IMAGE BOARDS</div><h1>BLACKED <em style="color:#ff85b9">visual concepts</em></h1><p>All generated mockups in one place. Tap any board to zoom.</p></div>
+    </div>
+    <div class="demo-notice">These are full-screen UI concept collages. The store itself is built with HTML/CSS; these images are shown here for visual reference and are not used as product photography.</div>
+    <div class="concept-grid">
+      <article class="concept-card"><button type="button" class="concept-image" data-preview-image="01-home-and-shopping-flow.png" aria-label="Open Home and shopping flow image"><img src="design-previews/01-home-and-shopping-flow.png" alt="Home and shopping flow — BLACKED generated mobile UI concept board" loading="lazy"></button><div class="concept-card-copy"><div><h3>Home and shopping flow</h3><p>Generated UI mockup · tap to zoom</p></div><button type="button" class="concept-open" data-preview-image="01-home-and-shopping-flow.png">View ↗</button></div></article>
+      <article class="concept-card"><button type="button" class="concept-image" data-preview-image="02-home-categories-and-wellness.png" aria-label="Open Home, categories and wellness image"><img src="design-previews/02-home-categories-and-wellness.png" alt="Home, categories and wellness — BLACKED generated mobile UI concept board" loading="lazy"></button><div class="concept-card-copy"><div><h3>Home, categories and wellness</h3><p>Generated UI mockup · tap to zoom</p></div><button type="button" class="concept-open" data-preview-image="02-home-categories-and-wellness.png">View ↗</button></div></article>
+      <article class="concept-card"><button type="button" class="concept-image" data-preview-image="03-shopping-screen-set.png" aria-label="Open Shopping screen set image"><img src="design-previews/03-shopping-screen-set.png" alt="Shopping screen set — BLACKED generated mobile UI concept board" loading="lazy"></button><div class="concept-card-copy"><div><h3>Shopping screen set</h3><p>Generated UI mockup · tap to zoom</p></div><button type="button" class="concept-open" data-preview-image="03-shopping-screen-set.png">View ↗</button></div></article>
+      <article class="concept-card"><button type="button" class="concept-image" data-preview-image="04-vertical-app-concepts.png" aria-label="Open Vertical app concepts image"><img src="design-previews/04-vertical-app-concepts.png" alt="Vertical app concepts — BLACKED generated mobile UI concept board" loading="lazy"></button><div class="concept-card-copy"><div><h3>Vertical app concepts</h3><p>Generated UI mockup · tap to zoom</p></div><button type="button" class="concept-open" data-preview-image="04-vertical-app-concepts.png">View ↗</button></div></article>
+      <article class="concept-card"><button type="button" class="concept-image" data-preview-image="05-dark-pink-screen-panels.png" aria-label="Open Dark and pink screen panels image"><img src="design-previews/05-dark-pink-screen-panels.png" alt="Dark and pink screen panels — BLACKED generated mobile UI concept board" loading="lazy"></button><div class="concept-card-copy"><div><h3>Dark and pink screen panels</h3><p>Generated UI mockup · tap to zoom</p></div><button type="button" class="concept-open" data-preview-image="05-dark-pink-screen-panels.png">View ↗</button></div></article>
+      <article class="concept-card"><button type="button" class="concept-image" data-preview-image="06-mobile-app-layouts.png" aria-label="Open Mobile app layouts image"><img src="design-previews/06-mobile-app-layouts.png" alt="Mobile app layouts — BLACKED generated mobile UI concept board" loading="lazy"></button><div class="concept-card-copy"><div><h3>Mobile app layouts</h3><p>Generated UI mockup · tap to zoom</p></div><button type="button" class="concept-open" data-preview-image="06-mobile-app-layouts.png">View ↗</button></div></article>
+      <article class="concept-card"><button type="button" class="concept-image" data-preview-image="07-product-and-cart-flow.png" aria-label="Open Product details and cart flow image"><img src="design-previews/07-product-and-cart-flow.png" alt="Product details and cart flow — BLACKED generated mobile UI concept board" loading="lazy"></button><div class="concept-card-copy"><div><h3>Product details and cart flow</h3><p>Generated UI mockup · tap to zoom</p></div><button type="button" class="concept-open" data-preview-image="07-product-and-cart-flow.png">View ↗</button></div></article>
+    </div>
+    <p class="footer-note">Product shots, sizes, ratings and prices in the mockups are illustrative. Live orders and payments are not connected.</p>
   </section>
 
   <section class="view" id="view-sanskari" data-view="sanskari">
@@ -323,6 +374,9 @@ main{max-width:1160px;margin:auto;padding:0 12px}
         <button class="profileitem" data-nav="sanskari"><span>♡ &nbsp; Explore innerwear</span><span>→</span></button>
         <button class="profileitem" data-nav="wellness"><span>✧ &nbsp; Wellness 18+</span><span>→</span></button>
         <button class="profileitem" data-open="comfortFinder"><span>⌕ &nbsp; Comfort Finder quiz</span><span>→</span></button>
+        <button class="profileitem" data-open="fitStudio"><span>✧ &nbsp; Fit Studio (manual preview)</span><span>→</span></button>
+        <button class="profileitem" data-open="sizeGuide"><span>▤ &nbsp; Size & fit guide</span><span>→</span></button>
+        <button class="profileitem" data-open="plusOne"><span>♡ &nbsp; Plus-One Club 18+</span><span>→</span></button>
         <button class="profileitem" data-open="wellnessInfo"><span>◇ &nbsp; Privacy & demo information</span><span>→</span></button>
       </div>
     </div>
@@ -337,6 +391,14 @@ main{max-width:1160px;margin:auto;padding:0 12px}
   <button class="navitem" data-nav="wishlist"><span class="navico">♡</span><span>Wishlist</span></button>
   <button class="navitem" data-nav="profile"><span class="navico">♙</span><span>Profile</span></button>
 </nav>
+
+<div class="overlay" id="conceptPreviewOverlay" role="dialog" aria-modal="true" aria-labelledby="conceptPreviewTitle">
+  <div class="sheet concept-full-sheet">
+    <div class="sheethead"><h2 id="conceptPreviewTitle">Design concept preview</h2><button class="close" data-close="conceptPreviewOverlay" aria-label="Close preview">×</button></div>
+    <div class="concept-full-stage"><img id="conceptFullImage" src="" alt="Expanded BLACKED mobile UI concept board"></div>
+    <p id="conceptPreviewCaption" class="concept-full-caption">Generated UI collage · not a product photograph.</p>
+  </div>
+</div>
 
 <div class="overlay" id="productOverlay" role="dialog" aria-modal="true" aria-labelledby="detailName">
   <div class="sheet">
@@ -374,6 +436,60 @@ main{max-width:1160px;margin:auto;padding:0 12px}
 
 <div class="overlay" id="infoOverlay" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
  <div class="sheet"><div class="sheethead"><h2 id="infoTitle">A note on this demo</h2><button class="close" data-close="infoOverlay" aria-label="Close">×</button></div><p style="font-size:13px;color:#dfd1dc">BLACKED is shown here as a front-end design preview based on your supplied mockups. The images in this repository are generated concept visuals and may not match real physical products.</p><ul class="featurelist"><li>No sign-in or profile database</li><li>No real inventory, orders, reviews or payment service</li><li>Prices and promotions are sample UI content only</li><li>Wellness age confirmation is self-attestation, not identity verification</li><li>Comfort Finder answers are not saved or sent to a server</li></ul><button class="btn secondary" data-close="infoOverlay" style="width:100%">Got it</button></div>
+</div>
+
+<div class="overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+ <div class="sheet" style="max-width:520px"><div class="sheethead"><h2 id="menuTitle">Explore BLACKED</h2><button class="close" data-close="menuOverlay" aria-label="Close">×</button></div>
+  <div class="profilelist">
+   <button class="profileitem" data-nav="home"><span>⌂ &nbsp; Home</span><span>→</span></button>
+   <button class="profileitem" data-nav="concepts"><span>▧ &nbsp; Generated design gallery</span><span>→</span></button>
+   <button class="profileitem" data-nav="sanskari"><span>♧ &nbsp; Sanskari Edit</span><span>→</span></button>
+   <button class="profileitem" data-nav="wellness"><span>♡ &nbsp; Wellness 18+</span><span>→</span></button>
+   <button class="profileitem" data-nav="wishlist"><span>♡ &nbsp; Wishlist</span><span>→</span></button>
+   <button class="profileitem" data-nav="profile"><span>♙ &nbsp; Profile & extra tools</span><span>→</span></button>
+  </div>
+ </div>
+</div>
+
+<div class="overlay" id="plusOneOverlay" role="dialog" aria-modal="true" aria-labelledby="plusOneTitle">
+ <div class="sheet"><div class="sheethead"><div><div class="eyebrow">PLUS-ONE CLUB · 18+</div><h2 id="plusOneTitle">Good plans feel better together.</h2></div><button class="close" data-close="plusOneOverlay" aria-label="Close">×</button></div>
+  <p style="font-size:12px;color:var(--muted)">A light companion / boyfriend-style outing planner concept. These are illustrative ideas—not real people, profiles, matches or bookings.</p>
+  <div class="moodgrid">
+   <button class="mood" data-plusone="Café date"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/companion-cafe.webp" alt="Illustrative café outing"><span>Café date · Save idea</span></button>
+   <button class="mood" data-plusone="Event night"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/companion-event.webp" alt="Illustrative event outing"><span>Event night · Save idea</span></button>
+   <button class="mood" data-plusone="Photo walk"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/companion-gallery.webp" alt="Illustrative gallery outing"><span>Photo walk · Save idea</span></button>
+   <button class="mood" data-plusone="Relaxed outing"><img src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/companion-cafe.webp" alt="Illustrative relaxed outing"><span>Relaxed outing · Save idea</span></button>
+  </div>
+  <div class="demo-notice">No profile search, messaging, matchmaking, reservations or payment is connected. Outing preferences are not saved to a server.</div>
+ </div>
+</div>
+
+<div class="overlay" id="fitStudioOverlay" role="dialog" aria-modal="true" aria-labelledby="fitStudioTitle">
+ <div class="sheet"><div class="sheethead"><div><div class="eyebrow">LOCAL PHOTO PREVIEW</div><h2 id="fitStudioTitle">Fit Studio</h2></div><button class="close" data-close="fitStudioOverlay" aria-label="Close">×</button></div>
+  <p style="font-size:12px;color:var(--muted)">Choose a photo from your device, then position a matching concept cutout. This is manual placement—not automatic or photorealistic fitting.</p>
+  <label class="formlabel" for="tryonPhotoInput">Your photo (stays in this page)</label><input id="tryonPhotoInput" type="file" accept="image/*" style="max-width:100%;font-size:12px">
+  <label class="formlabel" for="tryonGarmentSelect">Concept garment</label><select id="tryonGarmentSelect" style="width:100%;background:#211923;color:#fff;border:1px solid #493847;border-radius:11px;padding:11px"><option value="cutout-black-lace-set.webp">Midnight Lace</option><option value="cutout-bow-lace-set.webp">Bow Lace</option><option value="cutout-scarlet-satin-set.webp">Scarlet Satin</option><option value="cutout-ivory-bloom-set.webp">Ivory Bloom</option></select>
+  <div id="tryonStage" style="position:relative;margin:13px auto 12px;width:min(100%,380px);aspect-ratio:3/4;background:#1c131d;border-radius:15px;overflow:hidden;border:1px solid #493847">
+   <img id="tryonPhoto" src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/owner-ref-midnight-lace-user-upload.jpg" alt="Placeholder photo for manual Fit Studio preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+   <img id="tryonGarment" src="https://raw.githubusercontent.com/bhanu13yadav1-ai/Brand-website-3/main/cutout-black-lace-set.webp" alt="Selected garment concept overlay" style="position:absolute;left:30%;top:31%;width:40%;max-height:65%;object-fit:contain;filter:drop-shadow(0 6px 8px #0005);touch-action:none;cursor:move">
+  </div>
+  <label class="formlabel" for="tryonScale">Overlay size</label><input type="range" id="tryonScale" min="20" max="75" value="40" style="width:100%">
+  <label class="formlabel" for="tryonX">Move left / right</label><input type="range" id="tryonX" min="0" max="80" value="30" style="width:100%">
+  <label class="formlabel" for="tryonY">Move up / down</label><input type="range" id="tryonY" min="0" max="80" value="31" style="width:100%">
+  <button class="btn secondary" id="resetTryon" style="width:100%;margin-top:10px">Reset preview</button>
+ </div>
+</div>
+
+<div class="overlay" id="sizeGuideOverlay" role="dialog" aria-modal="true" aria-labelledby="sizeGuideTitle">
+ <div class="sheet"><div class="sheethead"><h2 id="sizeGuideTitle">Size & fit guide</h2><button class="close" data-close="sizeGuideOverlay" aria-label="Close">×</button></div>
+  <p style="font-size:12px;color:var(--muted)">A starter guide for this demo. Exact sizes vary by brand and garment. Use the product's verified measurement chart before ordering.</p>
+  <div style="overflow:auto"><table style="border-collapse:collapse;width:100%;font-size:12px"><thead><tr style="color:#ff9dca;text-align:left"><th style="padding:11px;border-bottom:1px solid #453445">Step</th><th style="padding:11px;border-bottom:1px solid #453445">Measure</th><th style="padding:11px;border-bottom:1px solid #453445">Tip</th></tr></thead><tbody>
+  <tr><td style="padding:11px;border-bottom:1px solid #302832">1</td><td style="padding:11px;border-bottom:1px solid #302832">Underbust</td><td style="padding:11px;border-bottom:1px solid #302832">Tape level, comfortably snug.</td></tr>
+  <tr><td style="padding:11px;border-bottom:1px solid #302832">2</td><td style="padding:11px;border-bottom:1px solid #302832">Full bust</td><td style="padding:11px;border-bottom:1px solid #302832">Keep tape parallel to the floor.</td></tr>
+  <tr><td style="padding:11px;border-bottom:1px solid #302832">3</td><td style="padding:11px;border-bottom:1px solid #302832">Check garment chart</td><td style="padding:11px;border-bottom:1px solid #302832">Don't assume sizing is universal.</td></tr>
+  </tbody></table></div>
+  <div class="demo-notice">No body measurements are collected or saved by this demo guide.</div>
+ </div>
 </div>
 
 <div class="overlay" id="ageOverlay" role="dialog" aria-modal="true" aria-labelledby="ageTitle">
@@ -441,6 +557,7 @@ function renderGrids(){
  $("#cartCount").textContent=[...state.cart.values()].reduce((a,n)=>a+n,0);
 }
 function nav(view,filter){
+ $("#menuOverlay").classList.remove("open");
  if(view==="wellness"&&!state.wellnessConfirmed){$("#ageOverlay").classList.add("open");state._pendingWellnessFilter=filter||null;return}
  state.view=view;
  $$(".view").forEach(v=>v.classList.toggle("active",v.dataset.view===view));
@@ -514,12 +631,28 @@ function makeRecommendations(){
  $("#recommendationArea").classList.remove("hide");
 }
 document.addEventListener("click",e=>{
+ const preview=e.target.closest("[data-preview-image]");
+ if(preview){
+  const name=preview.dataset.previewImage;
+  const title=(preview.closest(".concept-card")?.querySelector(".concept-card-copy h3")?.textContent)||(preview.querySelector("img")?.alt)||"Design concept preview";
+  $("#conceptFullImage").src="design-previews/"+name;
+  $("#conceptFullImage").alt=title;
+  $("#conceptPreviewTitle").textContent=title;
+  $("#conceptPreviewCaption").textContent=title+" · Generated UI collage, not individual product photography.";
+  $("#conceptPreviewOverlay").classList.add("open");
+  return;
+ }
  const navbtn=e.target.closest("[data-nav]");
  if(navbtn){e.preventDefault();nav(navbtn.dataset.nav,navbtn.dataset.filter);return}
  const add=e.target.closest("[data-add]");if(add){e.preventDefault();addToCart(add.dataset.add);return}
  const heart=e.target.closest("[data-heart]");if(heart){e.preventDefault();toggleWish(heart.dataset.heart);return}
  const detail=e.target.closest("[data-detail]");if(detail){e.preventDefault();openProduct(detail.dataset.detail);return}
- const open=e.target.closest("[data-open]");if(open){const target=open.dataset.open==="comfortFinder"?"comfortOverlay":"infoOverlay";$("#"+target).classList.add("open");return}
+ const open=e.target.closest("[data-open]");if(open){
+  const key=open.dataset.open;
+  if((key==="comfortFinder"||key==="plusOne")&&!state.wellnessConfirmed){state.pendingSpecial=key;$("#ageOverlay").classList.add("open");return}
+  const map={comfortFinder:"comfortOverlay",wellnessInfo:"infoOverlay",plusOne:"plusOneOverlay",fitStudio:"fitStudioOverlay",sizeGuide:"sizeGuideOverlay"};
+  $("#"+(map[key]||"infoOverlay")).classList.add("open");return
+ }
  const close=e.target.closest("[data-close]");if(close){$("#"+close.dataset.close).classList.remove("open");return}
  const tag=e.target.closest(".tag[data-filter]");if(tag){
   const parent=tag.closest("#sanskariFilters,#wellnessFilters");if(!parent)return;
@@ -537,13 +670,32 @@ $("#searchBtn").addEventListener("click",()=>{$("#searchBar").classList.toggle("
 $("#searchInput").addEventListener("input",e=>{state.search=e.target.value.trim();renderGrids()});
 $("#cartBtn").addEventListener("click",openCart);
 $("#wishlistBtn").addEventListener("click",()=>nav("wishlist"));
-$("#menuBtn").addEventListener("click",()=>{const v=state.view==="home"?"sanskari":state.view==="sanskari"?"wellness":"home";nav(v);});
+$("#menuBtn").addEventListener("click",()=>$("#menuOverlay").classList.add("open"));
 $("#detailPrev").addEventListener("click",()=>changeDetail(-1));
 $("#detailNext").addEventListener("click",()=>changeDetail(1));
 $("#getRecommendations").addEventListener("click",makeRecommendations);
-$("#confirmAge").addEventListener("click",()=>{state.wellnessConfirmed=true;$("#ageOverlay").classList.remove("open");nav("wellness",state._pendingWellnessFilter||undefined);state._pendingWellnessFilter=null});
-$("#declineAge").addEventListener("click",()=>{$("#ageOverlay").classList.remove("open");nav("home")});
+$("#confirmAge").addEventListener("click",()=>{state.wellnessConfirmed=true;$("#ageOverlay").classList.remove("open");const pending=state.pendingSpecial;state.pendingSpecial=null;if(pending==="plusOne"){$("#plusOneOverlay").classList.add("open");return}if(pending==="comfortFinder"){$("#comfortOverlay").classList.add("open");return}nav("wellness",state._pendingWellnessFilter||undefined);state._pendingWellnessFilter=null});
+$("#declineAge").addEventListener("click",()=>{$("#ageOverlay").classList.remove("open");state.pendingSpecial=null;state._pendingWellnessFilter=null;nav("home")});
 $("#checkoutDemo").addEventListener("click",()=>toast("Demo only — no payment or order was created"));
+$$("[data-plusone]").forEach(b=>b.addEventListener("click",()=>toast(`${b.dataset.plusone} idea selected for this session`)));
+function syncTryon(){
+ const g=$("#tryonGarment");
+ g.style.width=$("#tryonScale").value+"%";
+ g.style.left=$("#tryonX").value+"%";
+ g.style.top=$("#tryonY").value+"%";
+}
+["tryonScale","tryonX","tryonY"].forEach(id=>$("#"+id).addEventListener("input",syncTryon));
+$("#tryonGarmentSelect").addEventListener("change",e=>{$("#tryonGarment").src=img(e.target.value)});
+$("#tryonPhotoInput").addEventListener("change",e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ if(!file.type.startsWith("image/")){toast("Choose an image file");return}
+ const reader=new FileReader();reader.onload=()=>{$("#tryonPhoto").src=reader.result;toast("Photo loaded locally")};reader.readAsDataURL(file);
+});
+$("#resetTryon").addEventListener("click",()=>{
+ $("#tryonPhotoInput").value="";$("#tryonPhoto").src=img("owner-ref-midnight-lace-user-upload.jpg");
+ $("#tryonGarmentSelect").value="cutout-black-lace-set.webp";$("#tryonGarment").src=img("cutout-black-lace-set.webp");
+ $("#tryonScale").value=40;$("#tryonX").value=30;$("#tryonY").value=31;syncTryon();toast("Preview reset");
+});
 $$("[data-close]").forEach(b=>b.addEventListener("keydown",e=>{if(e.key==="Escape")b.click()}));
 $$(".overlay").forEach(el=>el.addEventListener("click",e=>{if(e.target===el)el.classList.remove("open")}));
 document.addEventListener("keydown",e=>{if(e.key==="Escape")$$(".overlay.open").forEach(o=>o.classList.remove("open"));if($("#productOverlay").classList.contains("open")){if(e.key==="ArrowLeft")changeDetail(-1);if(e.key==="ArrowRight")changeDetail(1)}});
